@@ -1,0 +1,66 @@
+@forward './reset';
+
+// *** Variables ***
+$color-dark: #222;
+$color-white: #fff;
+$color-text-shadow: #ccc;
+
+// *** Mixins ***
+@mixin text-shadow-3d(
+  $count: 29,
+  $x: -1px,
+  $y: 1px,
+  $blur: 0,
+  $color: $color-text-shadow
+) {
+  $shadow: ();
+
+  @for $i from 1 through $count {
+    $shadow: append($shadow, ($x * $i) ($y * $i) $blur $color, comma);
+  }
+
+  text-shadow: $shadow;
+}
+// *** Main Styles ***
+body {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 2rem;
+  background-color: $color-dark;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  padding: 2rem;
+}
+
+.text {
+  color: $color-white;
+
+  font-size: 19rem;
+  font-weight: 700;
+  letter-spacing: 0.2rem;
+  text-align: center;
+
+  @include text-shadow-3d;
+
+  @media (max-width: 1350px) {
+    font-size: 16rem;
+    @include text-shadow-3d(26);
+  }
+
+  @media (max-width: 1100px) {
+    font-size: 13rem;
+    @include text-shadow-3d(20);
+  }
+
+  @media (max-width: 900px) {
+    font-size: 9rem;
+    @include text-shadow-3d(14);
+  }
+
+  @media (max-width: 620px) {
+    font-size: 6rem;
+    @include text-shadow-3d(9);
+  }
+}
